@@ -10,7 +10,44 @@
 
 	<name>SpringBootDemo</name>
 	<description>Demo project for Spring Boot</description>
+	
+	<!-- plugin for heroku -->
+	
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+   		<full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
+</properties>
+
+<build>
+ <plugins>
+  <plugin>
+      <groupId>com.heroku.sdk</groupId>
+      <artifactId>heroku-maven-plugin</artifactId>
+      <version>1.1.1</version>
+      <configuration>
+          <appName>SpringBootDemo</appName>
+          <includeTarget>false</includeTarget>
+          <includes>
+              <include>${basedir}/${full-artifact-name}</include>
+          </includes>
+          <jdkVersion>1.8</jdkVersion>
+          <processTypes>
+              <web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
+          </processTypes>
+      </configuration>
+  </plugin>
+  
+ 
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+ 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -18,11 +55,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-	</properties>
+	
 
 	<dependencies>
 
@@ -59,15 +92,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-
 </project>

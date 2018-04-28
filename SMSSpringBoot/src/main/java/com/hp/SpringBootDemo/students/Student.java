@@ -2,10 +2,22 @@ package com.hp.SpringBootDemo.students;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
+import javax.validation.constraints.Size;
+
+@NamedStoredProcedureQueries({@NamedStoredProcedureQuery(name="getEmailById", procedureName="getEmail",resultClasses= {Student.class},
+parameters= {@StoredProcedureParameter(name="enrollmentNo",type=String.class,mode=ParameterMode.IN)})
+	
+})
+
 
 @Entity
 public class Student {
 	@Id
+	@Size(min=1,max=10,message="Enter the correct Value")
 	private String enrollmentNumber;
 	private String firstname;
 	private String lastname;

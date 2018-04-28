@@ -16,6 +16,9 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 	
+	//@RequestMapping("/")
+	//public 
+	
 	@RequestMapping("/students")
 	public List<Student> getAllStudents()
 	{
@@ -23,7 +26,7 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/students/{id}")
-	public Optional<Student> getStudent(@PathVariable String id)
+	public List<Student> getStudent(@PathVariable String id)
 	{
 		return studentService.getStudent(id);
 	}

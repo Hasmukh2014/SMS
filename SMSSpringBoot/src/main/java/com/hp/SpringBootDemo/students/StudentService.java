@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,9 @@ public class StudentService {
 	
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private StudentRepositoryCustom studentRepositoryCustom;
 	private List<Student> students; /*= new ArrayList<Student>(Arrays.asList(
 			new Student("1","Hasmukh","Patel","h@gmail.com","444444"),
 			new Student("2","Pinky","Patel","p@gmail.com","444444"),
@@ -27,9 +31,12 @@ public class StudentService {
 		return students;
 	}
 
-	public Optional<Student> getStudent(String id) {
+	@Procedure(name="getEmailById")
+	public List<Student> getStudent(String id) {
 		//return students.stream().filter(t->t.getEnrollmentNumber().equals(id)).findFirst().get();
-		return studentRepository.findById(id);
+		
+		//return studentRepository.findById(id);
+		return studentRepositoryCustom.getEmailById(id);
 	}
 
 	public void addStudent(Student student) {
