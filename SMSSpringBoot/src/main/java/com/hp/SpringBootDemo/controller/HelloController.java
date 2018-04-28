@@ -12,9 +12,9 @@ public class HelloController {
 		return "Hi";
 	}
 	
-	@RequestMapping("/")
+	/*@RequestMapping("/")
 	public String home()
 	{
 		return "Home Page";
-	}
+	}*/
 }
